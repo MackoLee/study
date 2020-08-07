@@ -1,3 +1,6 @@
+//채점 번호	    아이디 	문제 번호	결과	    메모리	시간	    언어	    코드 길이
+//21492951	sangok1993	16991	맞았습니다!!	5220	24	C++14 / 수정	830
+
 #include <stdio.h>
 #include <algorithm>
 #include <cmath>
