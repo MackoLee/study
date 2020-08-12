@@ -1,3 +1,4 @@
+# https://programmers.co.kr/learn/courses/30/lessons/64061?language=python3
 # 테스트 1 〉	통과 (0.05ms, 10.7MB)
 # 테스트 2 〉	통과 (0.05ms, 10.8MB)
 # 테스트 3 〉	통과 (0.05ms, 10.7MB)
