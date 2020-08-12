@@ -20,9 +20,6 @@
     
 def solution(a, b):
     answer = ''
-    day = {2: 'SUN',3: 'MON',4: 'TUE',5: 'WED',6:'THU',0: 'FRI',1: 'SAT'}
-    month = {1: 31, 2:29, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
-    m=0
-    for i in range(1,a):
-        m += month[i]
-    return day[(m+b-1)%7]
+    day = ['FRI','SAT','SUN','MON','TUE','WED','THU']
+    month = [0,31,60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
+    return day[(month[a-1]+b-1)%7]
