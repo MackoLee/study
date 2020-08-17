@@ -1,7 +1,12 @@
+// 배울점.. tuple을 잘못사용하면 메모리초과를 야기한다.
+
+
+// https://www.acmicpc.net/problem/9370
+// 채점 번호	아이디	문제 번호    	결과       메모리	시간	언어	                 코드 길이	
+// 21814407	sangok1993	9370	맞았습니다!!	2588	92	C++14 / 수정	1833
 #include <stdio.h>
 #include <algorithm>
 #include <vector>
-#include <tuple>
 #include <string.h>
 
 #define INF 543214321
