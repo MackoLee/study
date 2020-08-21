@@ -183,17 +183,17 @@
 > one more, please.
 >> Eiffer[아이퍼] tower, please (에펠탑 가주세요)
 
-일어났어?
-> Are you up?
-이거 작은 성의야
-> it's small token.
-출입금지구역
-> off limit.
-귀에 물들어갔어.
-> I got a water in my ear.
-점점 추워/더워져.
-> It's getting hotter/colder 
-맴버쉽에 등록하다
-> sign up for membership
-자연스럽게 해주세요.
-> i'd like a nature look.
+    일어났어?
+    > Are you up?
+    이거 작은 성의야
+    > it's small token.
+    출입금지구역
+    > off limit.
+    귀에 물들어갔어.
+    > I got a water in my ear.
+    점점 추워/더워져.
+    > It's getting hotter/colder 
+    맴버쉽에 등록하다
+    > sign up for membership
+    자연스럽게 해주세요.
+    > i'd like a nature look.
