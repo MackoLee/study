@@ -25,14 +25,14 @@
     }
 
 # 펜윅 트리
-    int Tree[100001], idx[100001], N;
-    void update_tree(int index, int value){
+    int Fen[100001], idx[100001], N;
+    void update_Fen(int index, int value){
         while(index <= N){
             Tree[index]+=value;
             index+=(index&-index);
         }
     }
-    int get_tree(int index){
+    int get_Fen(int index){
         int answer=0;
         while(index>0){
             answer+=Tree[index];
