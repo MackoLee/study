@@ -1,11 +1,11 @@
 # 세그먼트 트리
     #define tree_size (2<<17)
-
+    #define INF 2e9
     vector<int> seg(tree_size<<1,INF);
     void make_seg(){
         for(int i=tree_size;i<tree_size+N;i++)
             scanf("%d", &seg[i]);
-        for(int i=(1<<17)-1; i>0; i--)
+        for(int i=tree_size-1; i>0; i--)
             seg[i]=min(seg[i*2],seg[i*2+1]);
     }
     void update_seg(int i, int v){
