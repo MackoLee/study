@@ -1,0 +1,84 @@
+# 세그먼트 트리
+    #include <iostream>
+    #include <vector>
+    #include <algorithm>
+    using namespalce std;
+
+    #define tree_size (2<<17)
+
+    vector<int> seg(tree_size<<1,INF);
+    void make_seg(){
+        for(int i=(1<<17)-1; i>0; i--)
+            seg[i]=min(seg[i*2],seg[i*2+1]);
+    }
+    int get_seg(int a, int b){
+        a+=tree_size;
+        b+=tree_size;
+        int ans=INF;
+        for(;a<=b;a>>=1,b>>=1){
+            if(a&1) ans=min(ans,seg[a++]);
+            if(~b&1) ans=min(ans,seg[b--]);
+        }
+        return ans;
+    }
+
+# 펜윅 트리
+    int Tree[100001], idx[100001], N;
+    void update_tree(int index, int value){
+        while(index <= N){
+            Tree[index]+=value;
+            index+=(index&-index);
+        }
+    }
+    int get_tree(int index){
+        int answer=0;
+        while(index>0){
+            answer+=Tree[index];
+            index-=(index&-index);
+        }
+        return answer;
+    }
+
+# 스패닝 트리
+## 1. 힙 활용(하다가 처음 생각한것)
+    vector<vector<pair<int,int>>> n2n;
+    while(E--){
+        scanf("%d%d%d",&a,&b,&c);
+        n2n[a].push_back({c,b});
+        n2n[b].push_back({c,a});
+    }
+    int spening(){
+        int sum=0;
+        vector<bool> visited(V+1,false);
+        vector<pair<int,int>> heap;
+        heap.push_back({0,1});
+        while(!heap.empty()){
+            int cost=-heap.front().first, p= heap.front().second;
+            pop_heap(heap.begin(), heap.end());
+            heap.pop_back();
+            if(visited[p]) continue;
+            visited[p]=true;
+            sum+=cost;
+            for(auto next : n2n[p]){
+                if(visited[next.second]) continue;
+                heap.push_back({-next.first, next.second});
+                push_heap(heap.begin(), heap.end());
+            }
+        }
+        return sum;
+    }
+## 2. 정식 풀이
+    vector<int> pnt;
+    vector<pair<int, pair<int,int>>> lines;
+
+    int get_pnt(int a){
+        return pnt[a]==-1?a:pnt[a]=get_pnt(pnt[a]);
+    }
+    bool update_pnt(int a, int b){
+        int p_a=get_pnt(a), p_b=get_pnt(b);
+        if(p_a!=p_b){
+            pnt[p_a]=p_b;
+            return 1;
+        }
+        return 0;
+    }
