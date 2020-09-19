@@ -1,5 +1,6 @@
 # 세그먼트 트리
 ## A-B 까지의 최솟값, 최댓값 혹은 합. 등 여러방면으로 쓰일수 있지만 공간복잡도는 O(N*2) 이다. 업데이트나 값을 가져오는데 걸리는 시간 O(log2 n)
+``` c++
     #define tree_size (2<<17)
     #define INF 2e9
     vector<int> seg(tree_size<<1,INF);
@@ -24,9 +25,10 @@
         }
         return ans;
     }
-
+```
 # 펜윅 트리
 ## A-B 까지의 합 공간복잡도는 O(N) 이다. 업데이트나 값을 가져오는데 걸리는 시간 O(log2 n)
+```c++
     int Fen[100001], idx[100001], N;
     void update_Fen(int index, int value){
         while(index <= N){
@@ -42,10 +44,11 @@
         }
         return answer;
     }
-
+```
 # 스패닝 트리
 ## 모든 노드가 하나의 parent를 가지는 트리중 최소비용
 ## 1. 힙 활용(하다가 처음 생각한것)
+``` c++
     vector<vector<pair<int,int>>> n2n;
     while(E--){
         scanf("%d%d%d",&a,&b,&c);
@@ -72,7 +75,9 @@
         }
         return sum;
     }
+```
 ## 2. 정식 풀이
+``` c++
     vector<int> pnt;
     vector<pair<int, pair<int,int>>> lines;
 
@@ -87,3 +92,4 @@
         }
         return 0;
     }
+```
