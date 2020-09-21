@@ -26,6 +26,30 @@
         return ans;
     }
 ```
+## 세그먼트 트리 최솟값의 인덱스를 저장하는 방법.. 이렇게 하는것보다는 set, heap. 우선순위 큐를 이용하는게 좋다.
+``` c++
+
+long answer;
+int n, seg_tree[size*2];
+int get_min_idx(int seg1, int seg2){
+    if(seg1<size) seg1=seg_tree[seg1]+size;
+    if(seg2<size) seg2=seg_tree[seg2]+size;
+    return seg_tree[seg1]>seg_tree[seg2]?seg2-size:seg1-size;
+}
+long get_seg(int a, int b){
+    a+=size;
+    b+=size;
+    int ans=INF;
+    for(;a<=b;a>>=1,b>>=1){
+        if(a&1) ans=min(ans,seg_tree[a++]);
+        if(~b&1) ans=min(ans,seg_tree[b--]);
+    }
+    return ans;
+}
+for(int i=0;i<size*2;i++) seg_tree[i]=INF;
+for(int i=size;i<size+n;i++) scanf("%d",seg_tree+i);
+for(int i=size-1;i>0;i--) seg_tree[i]=get_min_idx(i*2,i*2+1);
+```
 # 펜윅 트리
 ## A-B 까지의 합 공간복잡도는 O(N) 이다. 업데이트나 값을 가져오는데 걸리는 시간 O(log2 n)
 ```c++
