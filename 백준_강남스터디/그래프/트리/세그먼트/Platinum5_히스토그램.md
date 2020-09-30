@@ -1,5 +1,5 @@
-https://www.acmicpc.net/problem/1725
-채점 번호	      아이디	   문제 번호	 결과	   메모리	시간	언어      	코드 길이
+https://www.acmicpc.net/problem/1725   
+채점 번호	      아이디	   문제 번호	 결과	   메모리	시간	언어      	코드 길이   
 22929047	sangok1993	1725	맞았습니다!!	3520	12	C++14 / 수정	1052
 
 ``` c++
