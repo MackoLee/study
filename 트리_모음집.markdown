@@ -28,27 +28,67 @@
 ```
 ## 세그먼트 트리 최솟값의 인덱스를 저장하는 방법
 ``` c++
-
-long answer;
-int n, seg_tree[size*2];
-int get_min_idx(int seg1, int seg2){
-    if(seg1<size) seg1=seg_tree[seg1]+size;
-    if(seg2<size) seg2=seg_tree[seg2]+size;
-    return seg_tree[seg1]>seg_tree[seg2]?seg2-size:seg1-size;
+int n, seg_tree[size*2],arr[size];
+int get_min_idx(int idx1, int idx2){
+    if(arr[idx1]>arr[idx2]) return idx2;
+    return idx1;
 }
-long get_seg(int a, int b){
-    a+=size;
-    b+=size;
-    int ans=INF;
-    for(;a<=b;a>>=1,b>>=1){
-        if(a&1) ans=min(ans,seg_tree[a++]);
-        if(~b&1) ans=min(ans,seg_tree[b--]);
+int get_seg(int a,int b){
+    int answer=a;
+    a+=tree_size;
+    b+=tree_size;
+    for(;a<=b;a/=2,b/=2){
+        if(a&1) answer=get_min_idx(answer,seg[a++]);
+        if(~b&1) answer=get_min_idx(answer,seg[b--]);
     }
-    return ans;
+    return answer;
 }
-for(int i=0;i<size*2;i++) seg_tree[i]=INF;
-for(int i=size;i<size+n;i++) scanf("%d",seg_tree+i);
-for(int i=size-1;i>0;i--) seg_tree[i]=get_min_idx(i*2,i*2+1);
+for(int i=0;i<N;i++) cin>>arr[i];
+for(int i=N;i<tree_size;i++) arr[i]=INF;
+
+for(int i=tree_size;i<tree_size*2;i++) seg[i]=i-tree_size;
+for(int i=tree_size-1;i>0;i--) seg[i]=get_min_idx(seg[i*2],seg[i*2+1]);
+```
+## 게으른 세그먼트 트리 합구하기.
+``` c++
+
+struct Node{
+    int S=0, area=1,M;
+    Node(int i){
+        for(;i<tree_size;i*=2)area*=2;
+        S=i-tree_size;
+        M=S+area/2;
+    }
+};
+
+long seg[tree_size*2]={0},d,lazy[tree_size*2]={0};
+void lazy_update_pnt(int i, long c){
+    lazy[i]+=c;
+    Node node(i);
+    for(i/=2;i;i/=2) seg[i]+=c*node.area;
+}
+void lazy_update(int a,int b,long c){
+    a+=tree_size;
+    b+=tree_size;
+    for(;a<=b;a/=2,b/=2){
+        if(a&1) lazy_update_pnt(a++,c);
+        if(~b&1) lazy_update_pnt(b--,c);
+    }
+}
+long lazy_get_seg(int a, int b, int i){
+    Node node(i);
+    if(a==node.S and b==node.S+node.area-1) return seg[i]+lazy[i]*node.area;
+    if(lazy[i]){
+        lazy[i*2]+=lazy[i];
+        lazy[i*2+1]+=lazy[i];
+        seg[i]+=lazy[i]*node.area;
+        lazy[i]=0;
+    }
+    if(b<node.M) return lazy_get_seg(a,b,i*2);
+    else if(node.M<=a) return lazy_get_seg(a,b,i*2+1);
+    else return lazy_get_seg(a,node.M-1,i*2)+lazy_get_seg(node.M,b,i*2+1);
+}
+
 ```
 # 펜윅 트리
 ## A-B 까지의 합 공간복잡도는 O(N) 이다. 업데이트나 값을 가져오는데 걸리는 시간 O(log2 n)
