@@ -1,5 +1,5 @@
 # 세그먼트 트리
-## A-B 까지의 최솟값, 최댓값 혹은 합. 등 여러방면으로 쓰일수 있지만 공간복잡도는 O(N*2) 이다. 업데이트나 값을 가져오는데 걸리는 시간 O(log2 n)
+## A-B 까지의 최솟값, 최댓값 혹은 합. 등 여러방면으로 쓰일수 있지만 공간복잡도는 O(N*2) 이다. 업데이트나 값을 가져오는데 걸리는 시간 O(logn)
 ``` c++
     #define tree_size (2<<17)
     #define INF 2e9
@@ -49,7 +49,7 @@ for(int i=N;i<tree_size;i++) arr[i]=INF;
 for(int i=tree_size;i<tree_size*2;i++) seg[i]=i-tree_size;
 for(int i=tree_size-1;i>0;i--) seg[i]=get_min_idx(seg[i*2],seg[i*2+1]);
 ```
-## 게으른 세그먼트 트리 합구하기.
+## 게으른 세그먼트 트리 합구하기. 시간 복잡도. O(logn*logn)
 ``` c++
 
 struct Node{
@@ -91,7 +91,7 @@ long lazy_get_seg(int a, int b, int i){
 
 ```
 # 펜윅 트리
-## A-B 까지의 합 공간복잡도는 O(N) 이다. 업데이트나 값을 가져오는데 걸리는 시간 O(log2 n)
+## A-B 까지의 합 공간복잡도는 O(N) 이다. 업데이트나 값을 가져오는데 걸리는 시간 O(logn)
 ```c++
     int Fen[100001], idx[100001], N;
     void update_Fen(int index, int value){
